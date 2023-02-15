@@ -38,7 +38,7 @@ public class Vacancies implements Serializable {
     private String postedDate;
 
     @Column(name="salary_range")
-    private String salary;
+    private String salaryRange;
 
     @Column(name="description")
     private String description;
