@@ -2,6 +2,7 @@ package com.oxcentra.phoenix.model;
 
 import lombok.*;
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="category")
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @AllArgsConstructor
-public class JobCategory {
+public class JobCategory implements Serializable {
 
     public JobCategory(){}
 
