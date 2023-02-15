@@ -4,14 +4,14 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name="modality")
 @Data
-@Builder
 @Getter
 @Setter
+@Entity
+@Builder
 @ToString
 @AllArgsConstructor
+@Table(name="modality")
 public class JobModalities implements Serializable {
     public JobModalities(){}
 

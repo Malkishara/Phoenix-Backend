@@ -6,14 +6,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Set;
 
-@Entity
-@Table(name="company")
 @Data
-@Builder
 @Getter
 @Setter
+@Entity
+@Builder
 @ToString
 @AllArgsConstructor
+@Table(name="company")
 public class Companies implements Serializable {
 
     public Companies(){}
