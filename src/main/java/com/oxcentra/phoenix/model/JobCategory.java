@@ -10,18 +10,18 @@ import java.io.Serializable;
 @Entity
 @Builder
 @ToString
+@NoArgsConstructor
 @AllArgsConstructor
 @Table(name="category")
 public class JobCategory implements Serializable {
 
-    public JobCategory(){}
 
     @Id
     @Column(name="id")
-    private String categoryId;
+    private String id;
 
     @Column(name="title")
-    private String categoryTitle;
+    private String title;
 
 
 }

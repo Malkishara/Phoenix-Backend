@@ -12,27 +12,32 @@ import java.io.Serializable;
 @Builder
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name="vacancies")
 public class Vacancies implements Serializable {
 
-    public Vacancies(){}
-
     @Id
     @Column(name="id")
-    private Integer vacancyId;
+    private Integer id;
 
     @Column(name="title")
-    private String vacancyTitle;
+    private String title;
 
     @ManyToOne
     @JoinColumn(name="company_id")
     private Companies company;
 
-    @Column(name="category_id")
-    private String catID;
+    @ManyToOne
+    @JoinColumn(name="category_id")
+    private JobCategory category;
 
-    @Column(name="modality_id")
-    private String modId;
+    @ManyToOne
+    @JoinColumn(name="type_id")
+    private JobTypes type;
+
+    @ManyToOne
+    @JoinColumn(name="modality_id")
+    private JobModalities modality;
 
     @Column(name="posted_date")
     private String postedDate;
@@ -44,6 +49,6 @@ public class Vacancies implements Serializable {
     private String description;
 
 
-    private String jobType;
+
 
 }

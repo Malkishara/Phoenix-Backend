@@ -10,15 +10,16 @@ import java.io.Serializable;
 @Entity
 @Builder
 @ToString
+@NoArgsConstructor
 @AllArgsConstructor
 @Table(name="types")
 public class JobTypes implements Serializable {
-    public JobTypes(){}
+
 
     @Id
     @Column(name="id")
-    private String typeId;
+    private String id;
 
     @Column(name="title")
-    private String typeTitle;
+    private String title;
 }

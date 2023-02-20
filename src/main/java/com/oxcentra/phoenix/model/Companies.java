@@ -12,25 +12,22 @@ import java.util.Set;
 @Entity
 @Builder
 @ToString
+@NoArgsConstructor
 @AllArgsConstructor
 @Table(name="company")
 public class Companies implements Serializable {
 
-    public Companies(){}
 
     @Id
     @Column(name="id")
-    private String companyId;
+    private String id;
 
     @Column(name="name")
-    private String companyName;
+    private String name;
 
     @Column(name="address")
-    private String companyAddress;
+    private String address;
 
-    @OneToMany
-    @JoinColumn(name="id")
-    private Set<Vacancies> vacancies;
 
 
 }
