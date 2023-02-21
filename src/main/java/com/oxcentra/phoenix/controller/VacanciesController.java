@@ -170,6 +170,19 @@ public class VacanciesController {
                                     }
 
                             }
+                        }else{
+                            if (data.getCategory_id() != null) {
+                                if (modality[j].getId().equals(vacancies.get(p).getModality().getId()) && data.getCategory_id().equals(vacancies.get(p).getCategory().getId())) {
+                                    searchVacancies.add(vacancies.get(p));
+                                    log.info("5 " + p);
+                                }
+                            } else {
+                                if (modality[j].getId().equals(vacancies.get(p).getModality().getId())) {
+                                    searchVacancies.add(vacancies.get(p));
+                                    log.info("6 " + p);
+                                }
+                            }
+
                         }
                     }
                 }else{
@@ -193,9 +206,21 @@ public class VacanciesController {
                                     searchVacancies.add(vacancies.get(p));
                                     log.info("7 " + p);
                                 }
+                            }else{
+
+                                searchVacancies.add(vacancies.get(p));
                             }
                         }
 
+                    }else{
+                        if (data.getCategory_id() != null) {
+                            if (data.getCategory_id().equals(vacancies.get(p).getCategory().getId())) {
+                                searchVacancies.add(vacancies.get(p));
+                                log.info("7 " + p);
+                            }
+                        }else{
+                            searchVacancies.add(vacancies.get(p));
+                        }
                     }
                 }
             }
