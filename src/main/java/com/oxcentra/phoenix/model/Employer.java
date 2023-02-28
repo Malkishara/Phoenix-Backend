@@ -1,10 +1,9 @@
 package com.oxcentra.phoenix.model;
 
 import lombok.*;
+
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Set;
+
 
 @Data
 @Getter
@@ -15,8 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="company")
-public class Companies implements Serializable {
-
+public class Employer {
 
     @Id
     @Column(name="id")
@@ -40,13 +38,5 @@ public class Companies implements Serializable {
 
     @Column(name="password")
     private String password;
-
-    @Column(name="verification")
-    private Boolean verification;
-
-
-
-
-
 
 }

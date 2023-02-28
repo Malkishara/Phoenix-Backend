@@ -1,4 +1,4 @@
-package com.oxcentra.phoenix.model;
+package com.oxcentra.phoenix.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SearchText {
-    private String word;
+public class Modality {
+    private String id;
 }
