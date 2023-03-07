@@ -10,5 +10,5 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SearchByCompany {
-    private String id;
+    private int id;
 }

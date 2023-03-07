@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import java.io.File;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,7 +17,7 @@ public class JobSeekerDto {
     private int id;
     private String firstName;
     private String lastName;
-    private String phoneNumber;
+    private String phone;
     private String email;
     private String cv;
     private String password;

@@ -14,13 +14,13 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="company")
+@Table(name="employer")
 public class Companies implements Serializable {
 
 
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+   // @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name="name")
@@ -50,3 +50,12 @@ public class Companies implements Serializable {
 
 
 }
+
+
+
+
+
+
+
+
+

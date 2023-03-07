@@ -12,7 +12,7 @@ import java.io.Serializable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="types")
+@Table(name="type")
 public class JobTypes implements Serializable {
 
 

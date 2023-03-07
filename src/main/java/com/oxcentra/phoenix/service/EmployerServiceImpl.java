@@ -31,7 +31,7 @@ public class EmployerServiceImpl implements EmployerService{
     public String addEmployer(EmployerDto employer) {
         String message;
         String val;
-
+              log.info(employer.getEmail());
         List<JobSeeker> foundJobSeeker=new ArrayList<>();
         List<Employer> foundEmployer=new ArrayList<>();
 

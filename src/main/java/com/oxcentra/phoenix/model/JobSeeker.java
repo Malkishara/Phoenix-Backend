@@ -17,7 +17,7 @@ public class JobSeeker {
 
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+   // @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name="first_name")
@@ -27,7 +27,7 @@ public class JobSeeker {
     private String lastName;
 
     @Column(name="phone_number")
-    private String phoneNumber;
+    private String phone;
 
     @Column(name="email")
     private String email;

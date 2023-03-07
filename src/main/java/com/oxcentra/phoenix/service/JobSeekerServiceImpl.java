@@ -7,7 +7,9 @@ import com.oxcentra.phoenix.repository.JobSeekerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,14 +43,14 @@ public class JobSeekerServiceImpl implements JobSeekerService{
 
 
         log.info(String.valueOf(foundJobSeeker));
-
+                 log.info(String.valueOf(jobSeekerDto.getCv().length()));
 
         if(jobSeekerDto.getPassword().equals(jobSeekerDto.getConfirmPassword()) && foundJobSeeker.size()==0 && foundEmployer.size()==0) {
             JobSeeker jobSeeker = new JobSeeker(
                     jobSeekerDto.getId(),
                     jobSeekerDto.getFirstName(),
                     jobSeekerDto.getLastName(),
-                    jobSeekerDto.getPhoneNumber(),
+                    jobSeekerDto.getPhone(),
                     jobSeekerDto.getEmail(),
                     jobSeekerDto.getCv(),
                     jobSeekerDto.getPassword()
@@ -73,5 +75,6 @@ public class JobSeekerServiceImpl implements JobSeekerService{
         }
         log.info(message);
         return val;
+
     }
 }

@@ -206,13 +206,16 @@ public class VacanciesController {
     @PostMapping("/company")
     public @ResponseBody
     List<Vacancies> getVacanciesByCompany(@RequestBody SearchByCompany data) {
+        log.info(String.valueOf(data.getId()));
         List<Vacancies> vacancies = vacanciesService.getAllVacancies();
         List<Vacancies> searchVacancies = new ArrayList<>();
         for (int i = 0; i < vacancies.stream().count(); i++) {
-            if (data.getId().equals(vacancies.get(i).getCompany().getId())) {
+            if (data.getId()==vacancies.get(i).getCompany().getId()) {
                 searchVacancies.add(vacancies.get(i));
             }
         }
+
+
         log.info("{}",searchVacancies.size());
         log.info("{}",searchVacancies);
         return searchVacancies;
