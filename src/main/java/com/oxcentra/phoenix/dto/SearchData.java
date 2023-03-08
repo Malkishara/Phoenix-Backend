@@ -1,8 +1,6 @@
-package com.oxcentra.phoenix.model;
+package com.oxcentra.phoenix.dto;
 
 import lombok.*;
-
-import java.util.List;
 
 
 @Data

@@ -1,4 +1,4 @@
-package com.oxcentra.phoenix.model;
+package com.oxcentra.phoenix.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,5 +10,5 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SearchByCompany {
-    private String id;
+    private int id;
 }
