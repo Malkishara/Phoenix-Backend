@@ -27,7 +27,21 @@ public class AuthenticationServiceImpl implements AuthenticationService,UserDeta
     List<Employer> foundEmployer=new ArrayList<>();
     List<JobSeeker> foundJobSeeker=new ArrayList<>();
 
+@Override
+public String userType(JwtRequest jwtRequest){
+    String userType="";
+    foundEmployer=employerService.getAllEmployer().stream().filter(e->
+            jwtRequest.getEmail().contains(e.getEmail())).collect(Collectors.toList());
+    foundJobSeeker=jobSeekerService.getAllJobSeeker().stream().filter(s->
+            jwtRequest.getEmail().contains(s.getEmail())).collect(Collectors.toList());
 
+    if(foundEmployer.size()>0){
+        userType="Employer";
+    }else if(foundJobSeeker.size()>0){
+        userType="JobSeeker";
+    }
+    return userType;
+}
 
    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

@@ -13,6 +13,8 @@ import java.util.List;
 @Service
 public interface AuthenticationService extends UserDetailsService {
 
+   String userType(JwtRequest jwtRequest);
+
    @Override
    UserDetails loadUserByUsername(String email) throws UsernameNotFoundException;
 }

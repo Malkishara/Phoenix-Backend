@@ -27,51 +27,6 @@ public class CompaniesServiceImpl implements CompaniesService{
         return companiesRepository.findAll();
     }
 
-//    @Override
-//    public String addEmployer(EmployerDto employer) {
-//      String message;
-//      String val;
-//
-//        List<JobSeeker> foundJobSeeker=new ArrayList<>();
-//        List<Companies> foundEmployer=new ArrayList<>();
-//
-//        foundEmployer=getAllCompanies().stream().filter(c->
-//                employer.getEmail().contains(c.getEmail())).collect(Collectors.toList());
-//
-//        foundJobSeeker=jobSeekerService.getAllJobSeeker().stream().filter(s->
-//                employer.getEmail().contains(s.getEmail())).collect(Collectors.toList());
-//
-//
-//
-//
-//        log.info(String.valueOf(foundEmployer));
-//
-//        if(employer.getPassword().equals(employer.getConfirmPassword()) && foundEmployer.size()==0 && foundJobSeeker.size()==0) {
-//            Employer employer1 = new Employer(
-//                    employer.getId(),
-//                    employer.getName(),
-//                    employer.getAddress(),
-//                    employer.getEmail(),
-//                    employer.getPhone(),
-//                    employer.getLogo(),
-//                    employer.getPassword()
-//
-//            );
-//
-//            companiesRepository.save(employer1);
-//       message=employer.getName()+" saved";
-//
-//       val="1";
-//        }else if(foundJobSeeker.size()>0 || foundEmployer.size()>0){
-//            message="Already registered email";
-//            val="2";
-//        }else{
-//            message="Confirmed password not matching with password";
-//            val="3";
-//        }
-//        log.info(message);
-//        return val;
-//    }
 
 
 }

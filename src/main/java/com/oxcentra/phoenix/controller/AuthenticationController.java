@@ -30,7 +30,7 @@ public class AuthenticationController {
     @Autowired
     private  AuthenticationService authenticationService;
 
-//    @Qualifier("authenticationManagerBean")
+
     @Autowired
     private  AuthenticationManager authenticationManager;
 
@@ -43,7 +43,7 @@ public class AuthenticationController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/login")
     @ResponseBody
-    public ResponseEntity authentication(@RequestBody JwtRequest jwtRequest) throws Exception {
+    public JwtResponse authentication(@RequestBody JwtRequest jwtRequest) throws Exception {
 
         log.info(jwtRequest.getEmail());
         try {
@@ -55,16 +55,25 @@ public class AuthenticationController {
         }
 
 
-        final String resultCode="SUCCESS";
+        final Boolean result=true;
+        final String message="SUCCESS";
         final String token=jwtUtility.generateToken(jwtRequest.getEmail());
         final Date expiresAt=jwtUtility.extractExpiration(token);
         final int expiresIn=jwtUtility.jwtExpirationInMs;
 
         log.info(token);
 
+        JwtResponse jwtResponse=new JwtResponse();
 
-        return new ResponseEntity(
-                new JwtResponse(resultCode, token, expiresAt, expiresIn),HttpStatus.OK);
+
+            jwtResponse.setUser_type(authenticationService.userType(jwtRequest));
+            jwtResponse.setResult(true);
+            jwtResponse.setMessage("Success");
+            jwtResponse.setAccess_token(jwtUtility.generateToken(jwtRequest.getEmail()));
+            jwtResponse.setExpires_at(jwtUtility.extractExpiration(token));
+            jwtResponse.setExpires_in(jwtUtility.jwtExpirationInMs);
+
+        return jwtResponse;
     }
 
 
