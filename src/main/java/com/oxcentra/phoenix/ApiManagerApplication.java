@@ -15,4 +15,3 @@ public class ApiManagerApplication {
 	}
 
 }
-//(exclude = {SecurityAutoConfiguration.class})

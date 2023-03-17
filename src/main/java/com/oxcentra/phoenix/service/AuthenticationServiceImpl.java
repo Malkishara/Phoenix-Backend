@@ -43,6 +43,22 @@ public String userType(JwtRequest jwtRequest){
     return userType;
 }
 
+    @Override
+    public int userId(JwtRequest jwtRequest){
+        int userId = -1;
+        foundEmployer=employerService.getAllEmployer().stream().filter(e->
+                jwtRequest.getEmail().contains(e.getEmail())).collect(Collectors.toList());
+        foundJobSeeker=jobSeekerService.getAllJobSeeker().stream().filter(s->
+                jwtRequest.getEmail().contains(s.getEmail())).collect(Collectors.toList());
+
+        if(foundEmployer.size()>0){
+            userId=foundEmployer.get(0).getId();
+        }else if(foundJobSeeker.size()>0){
+            userId=foundJobSeeker.get(0).getId();
+        }
+        return userId;
+    }
+
    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 

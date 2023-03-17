@@ -11,6 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class JwtResponse {
     private String user_type;
+    private int user_id;
     private Boolean result;
     private String message;
     private String access_token;

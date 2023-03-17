@@ -7,11 +7,10 @@ import com.oxcentra.phoenix.repository.JobSeekerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -53,7 +52,18 @@ public class JobSeekerServiceImpl implements JobSeekerService{
                     jobSeekerDto.getPhone(),
                     jobSeekerDto.getEmail(),
                     jobSeekerDto.getCv(),
-                    jobSeekerDto.getPassword()
+                    jobSeekerDto.getPassword(),
+                    jobSeekerDto.getProfilePicture(),
+                    jobSeekerDto.getDistrict(),
+                    jobSeekerDto.getCountry(),
+                    jobSeekerDto.getCollege(),
+                    jobSeekerDto.getDegree(),
+                    jobSeekerDto.getCertification(),
+                    jobSeekerDto.getSkills(),
+                    jobSeekerDto.getLanguages(),
+                    jobSeekerDto.getPosition(),
+                    jobSeekerDto.getExperience(),
+                    jobSeekerDto.getLinkdin()
 
             );
 
@@ -76,5 +86,26 @@ public class JobSeekerServiceImpl implements JobSeekerService{
         log.info(message);
         return val;
 
+    }
+
+    @Override
+    public JobSeeker getJobSeekerById(int id){
+
+         Optional<JobSeeker> jobSeeker=jobSeekerRepository.findById(id);
+
+
+        if(jobSeeker.isPresent()){
+            return jobSeeker.get();
+        }
+        throw new RuntimeException("Job seeker not found");
+    }
+
+    @Override
+    public Boolean updateJobSeeker(JobSeeker jobSeeker) {
+        log.info(String.valueOf(jobSeeker.getId()));
+        log.info(getJobSeekerById(jobSeeker.getId()).getPassword());
+        jobSeeker.setPassword(getJobSeekerById(jobSeeker.getId()).getPassword());
+        jobSeekerRepository.save(jobSeeker);
+        return true;
     }
 }

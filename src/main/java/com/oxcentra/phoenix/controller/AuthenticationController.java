@@ -11,9 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -67,6 +71,7 @@ public class AuthenticationController {
 
 
             jwtResponse.setUser_type(authenticationService.userType(jwtRequest));
+            jwtResponse.setUser_id(authenticationService.userId(jwtRequest));
             jwtResponse.setResult(true);
             jwtResponse.setMessage("Success");
             jwtResponse.setAccess_token(jwtUtility.generateToken(jwtRequest.getEmail()));
@@ -75,6 +80,7 @@ public class AuthenticationController {
 
         return jwtResponse;
     }
+
 
 
 }

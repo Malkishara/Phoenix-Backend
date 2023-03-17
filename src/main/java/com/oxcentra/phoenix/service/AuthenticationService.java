@@ -15,6 +15,8 @@ public interface AuthenticationService extends UserDetailsService {
 
    String userType(JwtRequest jwtRequest);
 
-   @Override
+    int userId(JwtRequest jwtRequest);
+
+    @Override
    UserDetails loadUserByUsername(String email) throws UsernameNotFoundException;
 }
