@@ -10,4 +10,8 @@ public interface EmployerService {
     List<Employer> getAllEmployer();
 
     String addEmployer(EmployerDto employer);
+
+    Employer getEmployerById(int id);
+
+    Boolean updateEmployer(Employer employer);
 }

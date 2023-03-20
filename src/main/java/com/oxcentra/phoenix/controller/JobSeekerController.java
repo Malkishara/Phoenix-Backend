@@ -35,6 +35,7 @@ public class JobSeekerController {
     JobSeeker getJobSeekerByEmail(@RequestBody JobSeekerDto jobSeekerDto) {
 
         log.info(String.valueOf(jobSeekerDto.getId()));
+        log.info(String.valueOf(jobSeekerService.getJobSeekerById(jobSeekerDto.getId()).getLanguages()));
         return jobSeekerService.getJobSeekerById(jobSeekerDto.getId());
     }
 

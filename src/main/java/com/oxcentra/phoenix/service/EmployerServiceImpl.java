@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -72,5 +73,25 @@ public class EmployerServiceImpl implements EmployerService{
         }
         log.info(message);
         return val;
+    }
+
+    @Override
+    public Employer getEmployerById(int id) {
+        Optional<Employer> employer=employerRepository.findById(id);
+
+
+        if(employer.isPresent()){
+            return employer.get();
+        }
+        throw new RuntimeException("employer not found");
+    }
+
+    @Override
+    public Boolean updateEmployer(Employer employer) {
+        log.info(String.valueOf(employer.getId()));
+        log.info(getEmployerById(employer.getId()).getPassword());
+        employer.setPassword(getEmployerById(employer.getId()).getPassword());
+        employerRepository.save(employer);
+        return true;
     }
 }
