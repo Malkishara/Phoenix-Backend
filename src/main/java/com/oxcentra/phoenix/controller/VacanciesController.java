@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -220,4 +221,40 @@ public class VacanciesController {
         log.info("{}",searchVacancies);
         return searchVacancies;
     }
+
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/vacancies/{id}")
+    public @ResponseBody
+    List<Vacancies> getAllVacanciesByCompanyId(@PathVariable Integer id) {
+       log.info(String.valueOf(id));
+        return vacanciesService.getAllVacanciesByCompanyId(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @DeleteMapping("/vacancy/{id}")
+    public @ResponseBody
+    Boolean deleteVacancyById(@PathVariable Integer id) {
+        log.info(String.valueOf(id));
+        return vacanciesService.deleteVacancyById(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/vacancy/{id}")
+    public @ResponseBody
+    Optional<Vacancies> getVacancyById(@PathVariable Integer id) {
+        log.info(String.valueOf(id));
+        log.info(String.valueOf(vacanciesService.getVacancyById(id)));
+        return vacanciesService.getVacancyById(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PutMapping("/vacancy/{id}")
+    public @ResponseBody
+    Boolean updateVacancy(@RequestBody Vacancy vacancy) {
+
+        log.info(String.valueOf(vacancy.getId()));
+        return vacanciesService.updateVacancy(vacancy);
+    }
+
 }
