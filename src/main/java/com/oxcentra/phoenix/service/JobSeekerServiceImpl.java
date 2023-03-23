@@ -88,24 +88,20 @@ public class JobSeekerServiceImpl implements JobSeekerService{
 
     }
 
-    @Override
-    public JobSeeker getJobSeekerById(int id){
-
-         Optional<JobSeeker> jobSeeker=jobSeekerRepository.findById(id);
-
-
-        if(jobSeeker.isPresent()){
-            return jobSeeker.get();
-        }
-        throw new RuntimeException("Job seeker not found");
-    }
 
     @Override
     public Boolean updateJobSeeker(JobSeeker jobSeeker) {
+
         log.info(String.valueOf(jobSeeker.getId()));
-        log.info(getJobSeekerById(jobSeeker.getId()).getPassword());
-        jobSeeker.setPassword(getJobSeekerById(jobSeeker.getId()).getPassword());
+        log.info(getJobseekerById(jobSeeker.getId()).get().getPassword());
+        jobSeeker.setPassword(getJobseekerById(jobSeeker.getId()).get().getPassword());
         jobSeekerRepository.save(jobSeeker);
         return true;
+    }
+
+    @Override
+    public Optional<JobSeeker> getJobseekerById(Integer id) {
+
+        return jobSeekerRepository.findById(id);
     }
 }
