@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface JobseekerRequestService {
     List<JobseekerRequest> getAllRequestByVacancyId(Integer id);
+
+    Boolean addRequest(JobseekerRequest jobseekerRequest);
 }

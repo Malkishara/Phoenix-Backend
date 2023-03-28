@@ -19,6 +19,9 @@ public class JobseekerRequestServiceImpl implements JobseekerRequestService{
     @Autowired
     private JobseekerRequestRepository jobseekerRequestRepository;
 
+    @Autowired
+    private RequestCountService requestCountService;
+
 
     @Override
     public List<JobseekerRequest> getAllRequestByVacancyId(Integer id) {
@@ -29,5 +32,14 @@ public class JobseekerRequestServiceImpl implements JobseekerRequestService{
 
         log.info(String.valueOf(jobseekerRequests));
         return jobseekerRequests;
+    }
+
+    @Override
+    public Boolean addRequest(JobseekerRequest jobseekerRequest) {
+        log.info(String.valueOf(jobseekerRequest.getJobSeeker()));
+        jobseekerRequestRepository.save(jobseekerRequest);
+        requestCountService.updateRequestCount(jobseekerRequest.getVacancy().getId());
+        log.info("True");
+        return true;
     }
 }
