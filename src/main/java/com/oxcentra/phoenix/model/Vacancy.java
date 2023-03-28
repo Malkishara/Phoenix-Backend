@@ -22,14 +22,17 @@ public class Vacancy {
     @Column(name="title")
     private String title;
 
+
     @Column(name="company_id")
     private Integer company;
 
     @Column(name="category_id")
     private String category;
 
+
     @Column(name="type_id")
     private String type;
+
 
     @Column(name="modality_id")
     private String modality;
