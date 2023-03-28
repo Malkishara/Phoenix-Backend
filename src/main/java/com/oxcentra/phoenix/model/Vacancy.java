@@ -16,18 +16,22 @@ import javax.persistence.*;
 public class Vacancy {
     @Id
     @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name="title")
     private String title;
 
-    @JoinColumn(name="category_id")
+    @Column(name="company_id")
+    private Integer company;
+
+    @Column(name="category_id")
     private String category;
 
-    @JoinColumn(name="type_id")
+    @Column(name="type_id")
     private String type;
 
-    @JoinColumn(name="modality_id")
+    @Column(name="modality_id")
     private String modality;
 
     @Column(name="salary_range")

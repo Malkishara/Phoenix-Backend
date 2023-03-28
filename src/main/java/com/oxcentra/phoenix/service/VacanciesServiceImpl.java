@@ -57,4 +57,11 @@ public class VacanciesServiceImpl implements VacanciesService{
         vacancyRepository.save(vacancy);
         return true;
     }
+
+    @Override
+    public Boolean addVacancy(Vacancy vacancy) {
+        log.info(vacancy.getTitle());
+        vacancyRepository.save(vacancy);
+        return true;
+    }
 }

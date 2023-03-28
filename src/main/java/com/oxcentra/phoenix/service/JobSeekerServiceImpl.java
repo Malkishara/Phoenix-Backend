@@ -63,7 +63,8 @@ public class JobSeekerServiceImpl implements JobSeekerService{
                     jobSeekerDto.getLanguages(),
                     jobSeekerDto.getPosition(),
                     jobSeekerDto.getExperience(),
-                    jobSeekerDto.getLinkdin()
+                    jobSeekerDto.getLinkdin(),
+                    jobSeekerDto.getCertificate()
 
             );
 

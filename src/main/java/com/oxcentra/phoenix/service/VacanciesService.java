@@ -17,4 +17,6 @@ public interface VacanciesService {
     Optional<Vacancies> getVacancyById(Integer id);
 
     Boolean updateVacancy(Vacancy vacancy);
+
+    Boolean addVacancy(Vacancy vacancy);
 }

@@ -257,4 +257,13 @@ public class VacanciesController {
         return vacanciesService.updateVacancy(vacancy);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/vacancy")
+    public @ResponseBody
+    Boolean addVacancy(@RequestBody Vacancy vacancy) {
+
+        log.info(String.valueOf(vacancy));
+        return vacanciesService.addVacancy(vacancy);
+    }
+
 }

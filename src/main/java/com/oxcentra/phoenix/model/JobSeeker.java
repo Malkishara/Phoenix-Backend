@@ -75,7 +75,11 @@ public class JobSeeker {
     @JoinColumn(name="jobseeker_id")
     private List<Skills> skills;
 
+    @OneToMany(cascade=CascadeType.ALL, targetEntity=CertificateImage.class)
+    @JoinColumn(name="jobseeker_id")
+    private List<CertificateImage> certificate;
 
-    public JobSeeker(int id, String firstName, String lastName, String phone, String email, String cv, String password, String profilePicture, String district, String country, String college, String degree, Certification certification, Skills skills, Languages languages, String position, String experience, String linkdin) {
+
+    public JobSeeker(int id, String firstName, String lastName, String phone, String email, String cv, String password, String profilePicture, String district, String country, String college, String degree, Certification certification, Skills skills, Languages languages, String position, String experience, String linkdin,CertificateImage certificateImage) {
     }
 }

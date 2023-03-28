@@ -1,5 +1,6 @@
 package com.oxcentra.phoenix.dto;
 
+import com.oxcentra.phoenix.model.CertificateImage;
 import com.oxcentra.phoenix.model.Certification;
 import com.oxcentra.phoenix.model.Languages;
 import com.oxcentra.phoenix.model.Skills;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.io.File;
+import java.util.List;
 
 @Getter
 @Setter
@@ -40,4 +42,5 @@ public class JobSeekerDto {
     private String linkdin;
     private String position;
     private Skills skills;
+    private CertificateImage certificate;
 }
