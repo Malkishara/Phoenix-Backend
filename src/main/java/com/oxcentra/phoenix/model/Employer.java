@@ -38,4 +38,7 @@ public class Employer {
     @Column(name="password")
     private String password;
 
+    @Column(name="verification")
+    private Boolean verification;
+
 }

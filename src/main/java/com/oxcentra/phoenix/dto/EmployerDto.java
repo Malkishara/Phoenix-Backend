@@ -2,6 +2,8 @@ package com.oxcentra.phoenix.dto;
 
 import lombok.*;
 
+import javax.persistence.Column;
+
 
 @Data
 @Getter
@@ -17,5 +19,6 @@ public class EmployerDto {
     private String logo;
     private String password;
     private String confirmPassword;
+    private Boolean verification;
 
 }

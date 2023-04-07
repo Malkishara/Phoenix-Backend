@@ -14,4 +14,6 @@ public interface EmployerService {
     Employer getEmployerById(int id);
 
     Boolean updateEmployer(Employer employer);
+
+    Boolean updateEmployerVerification(Employer employer);
 }

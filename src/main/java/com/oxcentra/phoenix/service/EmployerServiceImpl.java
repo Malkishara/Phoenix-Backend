@@ -47,6 +47,7 @@ public class EmployerServiceImpl implements EmployerService{
 
 
         log.info(String.valueOf(foundEmployer));
+        employer.setVerification(false);
 
         if(employer.getPassword().equals(employer.getConfirmPassword()) && foundEmployer.size()==0 && foundJobSeeker.size()==0) {
             Employer employer1 = new Employer(
@@ -56,7 +57,8 @@ public class EmployerServiceImpl implements EmployerService{
                     employer.getEmail(),
                     employer.getPhone(),
                     employer.getLogo(),
-                    employer.getPassword()
+                    employer.getPassword(),
+                    employer.getVerification()
 
             );
 
@@ -91,6 +93,20 @@ public class EmployerServiceImpl implements EmployerService{
         log.info(String.valueOf(employer.getId()));
         log.info(getEmployerById(employer.getId()).getPassword());
         employer.setPassword(getEmployerById(employer.getId()).getPassword());
+        employer.setVerification(getEmployerById(employer.getId()).getVerification());
+        employerRepository.save(employer);
+        return true;
+    }
+
+    @Override
+    public Boolean updateEmployerVerification(Employer employer) {
+        log.info(String.valueOf(employer.getId()));
+        employer.setName(getEmployerById(employer.getId()).getName());
+        employer.setEmail(getEmployerById(employer.getId()).getEmail());
+        employer.setPassword(getEmployerById(employer.getId()).getPassword());
+        employer.setAddress(getEmployerById(employer.getId()).getAddress());
+        employer.setLogo(getEmployerById(employer.getId()).getLogo());
+        employer.setPhone(getEmployerById(employer.getId()).getPhone());
         employerRepository.save(employer);
         return true;
     }

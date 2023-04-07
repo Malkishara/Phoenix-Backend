@@ -46,5 +46,14 @@ public class EmployerController {
         return employerService.updateEmployer(employer);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PutMapping("/verification/{id}")
+    public @ResponseBody
+    Boolean updateEmployerVerification(@RequestBody Employer employer) {
+
+        log.info(String.valueOf(employer.getId()));
+        return employerService.updateEmployerVerification(employer);
+    }
+
 
 }
