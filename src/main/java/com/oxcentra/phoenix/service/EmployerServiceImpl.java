@@ -69,12 +69,9 @@ public class EmployerServiceImpl implements EmployerService{
 
             );
 
-            Random random = new Random();
-            verificationCode = random.nextInt(90000) + 10000;
-            String body="Verification code: "+verificationCode;
-            String subject="Verification Code";
 
-            if(emailService.sendVerificationCode(employer.getEmail(),body,subject).equals(true)) {
+
+            if(sendVerificationCode().equals(true)) {
                // employerRepository.save(employer1);
                 message ="Verification code sent";
                 val = "1";
@@ -95,6 +92,19 @@ public class EmployerServiceImpl implements EmployerService{
         return val;
     }
 
+    @Override
+    public Boolean sendVerificationCode(){
+        Random random = new Random();
+        verificationCode = random.nextInt(90000000) + 10000000;
+        String body="Verification code: "+verificationCode;
+        String subject="Verification Code";
+        if(emailService.sendVerificationCode(employer1.getEmail(),body,subject).equals(true)){
+            log.info("verification code sent");
+            return true;
+        }else{
+            return false;
+        }
+    }
     @Override
     public Boolean saveEmployer() {
         log.info("Employer: "+employer1);

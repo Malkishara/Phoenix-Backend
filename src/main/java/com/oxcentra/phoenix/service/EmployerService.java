@@ -20,4 +20,6 @@ public interface EmployerService {
     Boolean updateEmployerVerification(Employer employer);
 
     Boolean verifyUser(Integer code);
+
+    Boolean sendVerificationCode();
 }
