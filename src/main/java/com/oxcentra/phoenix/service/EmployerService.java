@@ -15,5 +15,9 @@ public interface EmployerService {
 
     Boolean updateEmployer(Employer employer);
 
+    Boolean saveEmployer();
+
     Boolean updateEmployerVerification(Employer employer);
+
+    Boolean verifyUser(Integer code);
 }

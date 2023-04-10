@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -23,6 +24,12 @@ public class EmployerServiceImpl implements EmployerService{
 
     @Autowired
     private JobSeekerService jobSeekerService;
+
+    @Autowired
+    private EmailService emailService;
+
+    private int verificationCode;
+    private Employer employer1;
 
     public List<Employer> getAllEmployer(){
         return employerRepository.findAll();
@@ -50,7 +57,7 @@ public class EmployerServiceImpl implements EmployerService{
         employer.setVerification(false);
 
         if(employer.getPassword().equals(employer.getConfirmPassword()) && foundEmployer.size()==0 && foundJobSeeker.size()==0) {
-            Employer employer1 = new Employer(
+             employer1 = new Employer(
                     employer.getId(),
                     employer.getName(),
                     employer.getAddress(),
@@ -62,10 +69,21 @@ public class EmployerServiceImpl implements EmployerService{
 
             );
 
-            employerRepository.save(employer1);
-            message=employer.getName()+" saved";
+            Random random = new Random();
+            verificationCode = random.nextInt(90000) + 10000;
+            String body="Verification code: "+verificationCode;
+            String subject="Verification Code";
 
-            val="1";
+            if(emailService.sendVerificationCode(employer.getEmail(),body,subject).equals(true)) {
+               // employerRepository.save(employer1);
+                message ="Verification code sent";
+                val = "1";
+            }else{
+                message =  " error";
+                val = "4";
+            }
+
+
         }else if(foundJobSeeker.size()>0 || foundEmployer.size()>0){
             message="Already registered email";
             val="2";
@@ -75,6 +93,27 @@ public class EmployerServiceImpl implements EmployerService{
         }
         log.info(message);
         return val;
+    }
+
+    @Override
+    public Boolean saveEmployer() {
+        log.info("Employer: "+employer1);
+        employerRepository.save(employer1);
+        return true;
+    }
+
+    @Override
+    public Boolean verifyUser(Integer code){
+        log.info(String.valueOf(code));
+        log.info(String.valueOf(verificationCode));
+        if(code.equals(verificationCode)){
+            log.info("employer saved");
+            return saveEmployer();
+        }else{
+            log.info("employer didn't saved");
+            return false;
+        }
+
     }
 
     @Override
@@ -97,6 +136,8 @@ public class EmployerServiceImpl implements EmployerService{
         employerRepository.save(employer);
         return true;
     }
+
+
 
     @Override
     public Boolean updateEmployerVerification(Employer employer) {
