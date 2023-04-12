@@ -39,24 +39,37 @@ public class EmployerServiceImpl implements EmployerService{
     public String addEmployer(EmployerDto employer) {
         String message;
         String val;
+        int num=0;
               log.info(employer.getEmail());
         List<JobSeeker> foundJobSeeker=new ArrayList<>();
         List<Employer> foundEmployer=new ArrayList<>();
+        List<JobSeeker> allJobSeekers=jobSeekerService.getAllJobSeeker();
 
-        foundEmployer=getAllEmployer().stream().filter(c->
-                employer.getEmail().contains(c.getEmail())).collect(Collectors.toList());
+//        foundEmployer=getAllEmployer().stream().filter(c->
+//                employer.getEmail().contains(c.getEmail())).collect(Collectors.toList());
+//
+//
+//        foundJobSeeker = allJobSeekers.stream()
+//                .filter(s -> s != null && employer.getEmail().contains(s.getEmail()))
+//                .collect(Collectors.toList());
 
+      for(int i=0;i<getAllEmployer().size();i++){
+          if(employer.getEmail().equals(getAllEmployer().get(i).getEmail())){
+              num++;
+          }
+      }
 
-        foundJobSeeker=jobSeekerService.getAllJobSeeker().stream().filter(s->
-                employer.getEmail().contains(s.getEmail())).collect(Collectors.toList());
+        for(int j=0;j<allJobSeekers.size();j++){
+            if(employer.getEmail().equals(allJobSeekers.get(j).getEmail())){
+                num++;
+            }
+        }
+log.info(String.valueOf(num));
 
-
-
-
-        log.info(String.valueOf(foundEmployer));
+//        log.info(String.valueOf(foundEmployer));
         employer.setVerification(false);
 
-        if(employer.getPassword().equals(employer.getConfirmPassword()) && foundEmployer.size()==0 && foundJobSeeker.size()==0) {
+        if(employer.getPassword().equals(employer.getConfirmPassword()) && num==0) {
              employer1 = new Employer(
                     employer.getId(),
                     employer.getName(),
@@ -72,7 +85,7 @@ public class EmployerServiceImpl implements EmployerService{
 
 
             if(sendVerificationCode().equals(true)) {
-               // employerRepository.save(employer1);
+
                 message ="Verification code sent";
                 val = "1";
             }else{
@@ -81,7 +94,7 @@ public class EmployerServiceImpl implements EmployerService{
             }
 
 
-        }else if(foundJobSeeker.size()>0 || foundEmployer.size()>0){
+        }else if(num>0){
             message="Already registered email";
             val="2";
         }else{
@@ -107,8 +120,11 @@ public class EmployerServiceImpl implements EmployerService{
     }
     @Override
     public Boolean saveEmployer() {
+        String body="Congratulations!!! You have successfully registered with Phoenix.";
+        String subject="Registration Successful";
         log.info("Employer: "+employer1);
         employerRepository.save(employer1);
+        emailService.sendVerificationCode(employer1.getEmail(),body,subject);
         return true;
     }
 

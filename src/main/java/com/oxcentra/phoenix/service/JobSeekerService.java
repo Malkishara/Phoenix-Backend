@@ -9,7 +9,10 @@ import java.util.Optional;
 public interface JobSeekerService {
 
     List<JobSeeker> getAllJobSeeker();
-    String addJobSeeker(JobSeekerDto jobSeekerDto);
+    String addJobSeeker(JobSeekerDto jobSeeker);
     Boolean updateJobSeeker(JobSeeker jobSeeker);
     Optional<JobSeeker> getJobseekerById(Integer id);
+    Boolean saveJobseeker();
+    Boolean verifyUser(Integer code);
+    Boolean sendVerificationCode();
 }

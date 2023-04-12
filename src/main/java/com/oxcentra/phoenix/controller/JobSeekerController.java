@@ -22,10 +22,10 @@ public class JobSeekerController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/jobseeker_signup")
     public @ResponseBody
-    String addJobSeeker( @RequestBody JobSeekerDto jobSeekerDto){
+    String addJobSeeker( @RequestBody JobSeekerDto jobSeeker){
 
-
-        String id=jobSeekerService.addJobSeeker(jobSeekerDto);
+         log.info(jobSeeker.getEmail());
+        String id=jobSeekerService.addJobSeeker(jobSeeker);
        log.info(id);
         return id;
     }
