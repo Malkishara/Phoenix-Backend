@@ -7,12 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.cert.Certificate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -110,20 +108,35 @@ public class JobSeekerServiceImpl implements JobSeekerService{
         verificationCode = random.nextInt(90000000) + 10000000;
         String body="Verification code: "+verificationCode;
         String subject="Verification Code";
-        if(emailService.sendVerificationCode(jobSeeker1.getEmail(),body,subject).equals(true)){
+        if(emailService.sendEmail(jobSeeker1.getEmail(),body,subject).equals(true)){
             log.info("verification code sent");
             return true;
         }else{
             return false;
         }
     }
+
+    @Override
+    public Boolean updatePassword(int userId, String userEmail, String password) {
+        String body="Your password Changed";
+        String subject="Password Changed";
+
+
+
+        JobSeeker jobSeeker=getJobseekerById(userId);
+        jobSeeker.setPassword(password);
+        jobSeekerRepository.save(jobSeeker);
+        emailService.sendEmail(userEmail,body,subject);
+        return true;
+    }
+
     @Override
     public Boolean saveJobseeker() {
         String body="Congratulations!!! You have successfully registered with Phoenix.";
         String subject="Registration Successful";
         log.info("Job Seeker: "+jobSeeker1);
         jobSeekerRepository.save(jobSeeker1);
-        emailService.sendVerificationCode(jobSeeker1.getEmail(),body,subject);
+        emailService.sendEmail(jobSeeker1.getEmail(),body,subject);
         return true;
     }
 
@@ -144,15 +157,21 @@ public class JobSeekerServiceImpl implements JobSeekerService{
     public Boolean updateJobSeeker(JobSeeker jobSeeker) {
 
         log.info(String.valueOf(jobSeeker.getId()));
-        log.info(getJobseekerById(jobSeeker.getId()).get().getPassword());
-        jobSeeker.setPassword(getJobseekerById(jobSeeker.getId()).get().getPassword());
+        log.info(getJobseekerById(jobSeeker.getId()).getPassword());
+        jobSeeker.setPassword(getJobseekerById(jobSeeker.getId()).getPassword());
         jobSeekerRepository.save(jobSeeker);
         return true;
     }
 
     @Override
-    public Optional<JobSeeker> getJobseekerById(Integer id) {
+    public JobSeeker getJobseekerById(Integer id) {
 
-        return jobSeekerRepository.findById(id);
+        Optional<JobSeeker> jobSeeker=jobSeekerRepository.findById(id);
+
+
+        if(jobSeeker.isPresent()){
+            return jobSeeker.get();
+        }
+        throw new RuntimeException("employer not found");
     }
 }

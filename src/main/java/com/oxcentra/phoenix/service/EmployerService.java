@@ -22,4 +22,6 @@ public interface EmployerService {
     Boolean verifyUser(Integer code);
 
     Boolean sendVerificationCode();
+
+    Boolean updatePassword(Integer id,String userEmail, String password);
 }

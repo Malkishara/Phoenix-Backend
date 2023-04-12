@@ -111,20 +111,33 @@ log.info(String.valueOf(num));
         verificationCode = random.nextInt(90000000) + 10000000;
         String body="Verification code: "+verificationCode;
         String subject="Verification Code";
-        if(emailService.sendVerificationCode(employer1.getEmail(),body,subject).equals(true)){
+        if(emailService.sendEmail(employer1.getEmail(),body,subject).equals(true)){
             log.info("verification code sent");
             return true;
         }else{
             return false;
         }
     }
+
+    @Override
+    public Boolean updatePassword(Integer id,String userEmail, String password) {
+        String body="Your password Changed";
+        String subject="Password Changed";
+
+        Employer employer=getEmployerById(id);
+        employer.setPassword(password);
+        employerRepository.save(employer);
+        emailService.sendEmail(userEmail,body,subject);
+        return true;
+    }
+
     @Override
     public Boolean saveEmployer() {
         String body="Congratulations!!! You have successfully registered with Phoenix.";
         String subject="Registration Successful";
         log.info("Employer: "+employer1);
         employerRepository.save(employer1);
-        emailService.sendVerificationCode(employer1.getEmail(),body,subject);
+        emailService.sendEmail(employer1.getEmail(),body,subject);
         return true;
     }
 

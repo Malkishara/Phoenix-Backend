@@ -4,15 +4,16 @@ import com.oxcentra.phoenix.dto.JobSeekerDto;
 import com.oxcentra.phoenix.model.JobSeeker;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface JobSeekerService {
 
     List<JobSeeker> getAllJobSeeker();
     String addJobSeeker(JobSeekerDto jobSeeker);
     Boolean updateJobSeeker(JobSeeker jobSeeker);
-    Optional<JobSeeker> getJobseekerById(Integer id);
+    JobSeeker getJobseekerById(Integer id);
     Boolean saveJobseeker();
     Boolean verifyUser(Integer code);
     Boolean sendVerificationCode();
+
+    Boolean updatePassword(int userId, String userEmail, String password);
 }

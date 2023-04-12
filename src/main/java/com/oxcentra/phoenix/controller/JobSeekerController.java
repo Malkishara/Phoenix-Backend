@@ -45,7 +45,7 @@ public class JobSeekerController {
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/jobseeker/{id}")
     public @ResponseBody
-    Optional<JobSeeker> getJobseekerById(@PathVariable Integer id) {
+    JobSeeker getJobseekerById(@PathVariable Integer id) {
         log.info(String.valueOf(id));
         log.info(String.valueOf(jobSeekerService.getJobseekerById(id)));
         return jobSeekerService.getJobseekerById(id);

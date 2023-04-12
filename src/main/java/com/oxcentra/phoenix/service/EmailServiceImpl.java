@@ -13,7 +13,7 @@ public class EmailServiceImpl implements EmailService{
     @Autowired
     private JavaMailSender mailSender;
 
-    public Boolean sendVerificationCode(String toEmail,
+    public Boolean sendEmail(String toEmail,
                                 String body,
                                 String subject) {
         SimpleMailMessage message = new SimpleMailMessage();
