@@ -32,7 +32,7 @@ public class VacanciesServiceImpl implements VacanciesService{
         List<Vacancies> vacancies = new ArrayList<>();
 
 
-        vacancies=getAllVacancies().stream().filter(v->id.equals(v.getCompany().getId())).collect(Collectors.toList());
+        vacancies=getAllVacancies().stream().filter(v->id.equals(v.getEmployer().getId())).collect(Collectors.toList());
 
         log.info(String.valueOf(vacancies));
         return vacancies;

@@ -1,7 +1,6 @@
 package com.oxcentra.phoenix.service;
 
 import com.oxcentra.phoenix.dto.EmployerDto;
-import com.oxcentra.phoenix.model.Companies;
 import com.oxcentra.phoenix.model.Employer;
 import com.oxcentra.phoenix.model.JobSeeker;
 import com.oxcentra.phoenix.repository.EmployerRepository;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -129,6 +127,11 @@ log.info(String.valueOf(num));
         employerRepository.save(employer);
         emailService.sendEmail(userEmail,body,subject);
         return true;
+    }
+
+    @Override
+    public List<Employer> getAllEmployers() {
+        return employerRepository.findAll();
     }
 
     @Override

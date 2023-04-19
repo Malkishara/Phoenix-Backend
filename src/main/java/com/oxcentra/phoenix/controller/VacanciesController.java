@@ -76,34 +76,65 @@ public class VacanciesController {
             log.info("count "+matchedVacanciesForSearchedTextList.stream().count());
             log.info(String.valueOf(matchedVacanciesForSearchedTextList));
             if (category != null) {
-                if (typeIdList.stream().count() != 0) {
-                    if (modalityIdList.stream().count() != 0) {
-                        searchVacancies =
-                                matchedVacanciesForSearchedTextList.stream()
-                                        .filter(
-                                                v -> category.equals(v.getCategory().getId()) && modalityIdList.contains(v.getModality().getId()) && typeIdList.contains(v.getType().getId()))
-                                        .collect(Collectors.toList());
+                if(!category.equals("0")) {
+                    if (typeIdList.stream().count() != 0) {
+                        if (modalityIdList.stream().count() != 0) {
+                            searchVacancies =
+                                    matchedVacanciesForSearchedTextList.stream()
+                                            .filter(
+                                                    v -> category.equals(v.getCategory().getId()) && modalityIdList.contains(v.getModality().getId()) && typeIdList.contains(v.getType().getId()))
+                                            .collect(Collectors.toList());
+                        } else {
+                            searchVacancies =
+                                    matchedVacanciesForSearchedTextList.stream()
+                                            .filter(
+                                                    v -> category.equals(v.getCategory().getId()) && typeIdList.contains(v.getType().getId()))
+                                            .collect(Collectors.toList());
+                        }
                     } else {
-                        searchVacancies =
-                                matchedVacanciesForSearchedTextList.stream()
-                                        .filter(
-                                                v -> category.equals(v.getCategory().getId()) && typeIdList.contains(v.getType().getId()))
-                                        .collect(Collectors.toList());
+                        if (modalityIdList.stream().count() != 0) {
+                            searchVacancies =
+                                    matchedVacanciesForSearchedTextList.stream()
+                                            .filter(
+                                                    v -> category.equals(v.getCategory().getId()) && modalityIdList.contains(v.getModality().getId()))
+                                            .collect(Collectors.toList());
+                        } else {
+                            searchVacancies =
+                                    matchedVacanciesForSearchedTextList.stream()
+                                            .filter(
+                                                    v -> category.equals(v.getCategory().getId()))
+                                            .collect(Collectors.toList());
+                        }
                     }
-                } else {
-                    if (modalityIdList.stream().count() != 0) {
-                        searchVacancies =
-                                matchedVacanciesForSearchedTextList.stream()
-                                        .filter(
-                                                v -> category.equals(v.getCategory().getId()) && modalityIdList.contains(v.getModality().getId()))
-                                        .collect(Collectors.toList());
+                }else{
+                    if (typeIdList.stream().count() != 0) {
+                        if (modalityIdList.stream().count() != 0) {
+                            searchVacancies =
+                                    matchedVacanciesForSearchedTextList.stream()
+                                            .filter(
+                                                    v -> modalityIdList.contains(v.getModality().getId()) && typeIdList.contains(v.getType().getId()))
+                                            .collect(Collectors.toList());
+                        } else {
+                            searchVacancies =
+                                    matchedVacanciesForSearchedTextList.stream()
+                                            .filter(
+                                                    v ->  typeIdList.contains(v.getType().getId()))
+                                            .collect(Collectors.toList());
+                        }
                     } else {
-                        searchVacancies =
-                                matchedVacanciesForSearchedTextList.stream()
-                                        .filter(
-                                                v -> category.equals(v.getCategory().getId()))
-                                        .collect(Collectors.toList());
+                        if (modalityIdList.stream().count() != 0) {
+                            searchVacancies =
+                                    matchedVacanciesForSearchedTextList.stream()
+                                            .filter(
+                                                    v ->  modalityIdList.contains(v.getModality().getId()))
+                                            .collect(Collectors.toList());
+                        } else {
+                            searchVacancies =
+                                    matchedVacanciesForSearchedTextList;
+
+                        }
                     }
+
                 }
             } else {
                 if (typeIdList.stream().count() != 0) {
@@ -136,7 +167,8 @@ public class VacanciesController {
 
 
         }else {
-            if (category != null) {
+            if (category != null ) {
+                if(!category.equals("0")){
                 if (typeIdList.stream().count() != 0) {
                     if (modalityIdList.stream().count() != 0) {
                         searchVacancies =
@@ -159,11 +191,37 @@ public class VacanciesController {
                                                 v -> category.equals(v.getCategory().getId()) && modalityIdList.contains(v.getModality().getId()))
                                         .collect(Collectors.toList());
                     } else {
-                        searchVacancies =
-                                vacancies.stream()
-                                        .filter(
-                                                v -> category.equals(v.getCategory().getId()))
-                                        .collect(Collectors.toList());
+                        searchVacancies = vacancies.stream()
+                                .filter(
+                                        v -> category.equals(v.getCategory().getId()))
+                                .collect(Collectors.toList());
+                    }
+                }
+                }else{
+                    if (typeIdList.stream().count() != 0) {
+                        if (modalityIdList.stream().count() != 0) {
+                            searchVacancies =
+                                    vacancies.stream()
+                                            .filter(
+                                                    v ->  modalityIdList.contains(v.getModality().getId()) && typeIdList.contains(v.getType().getId()))
+                                            .collect(Collectors.toList());
+                        } else {
+                            searchVacancies =
+                                    vacancies.stream()
+                                            .filter(
+                                                    v ->  typeIdList.contains(v.getType().getId()))
+                                            .collect(Collectors.toList());
+                        }
+                    } else {
+                        if (modalityIdList.stream().count() != 0) {
+                            searchVacancies =
+                                    vacancies.stream()
+                                            .filter(
+                                                    v ->  modalityIdList.contains(v.getModality().getId()))
+                                            .collect(Collectors.toList());
+                        } else {
+                            searchVacancies = vacancies;
+                        }
                     }
                 }
             } else {
@@ -211,7 +269,7 @@ public class VacanciesController {
         List<Vacancies> vacancies = vacanciesService.getAllVacancies();
         List<Vacancies> searchVacancies = new ArrayList<>();
         for (int i = 0; i < vacancies.stream().count(); i++) {
-            if (data.getId()==vacancies.get(i).getCompany().getId()) {
+            if (data.getId()==vacancies.get(i).getEmployer().getId()) {
                 searchVacancies.add(vacancies.get(i));
             }
         }

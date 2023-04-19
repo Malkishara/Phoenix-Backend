@@ -25,7 +25,7 @@ public class Vacancies implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="company_id")
-    private Companies company;
+    private Employer employer;
 
     @ManyToOne
     @JoinColumn(name="category_id")
