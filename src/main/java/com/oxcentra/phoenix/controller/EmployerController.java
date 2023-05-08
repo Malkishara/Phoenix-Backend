@@ -36,6 +36,16 @@ public class EmployerController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/employer/{id}")
+    public @ResponseBody
+    Employer getEmployerById(@PathVariable Integer id) {
+
+        log.info(String.valueOf(id));
+
+        return employerService.getEmployerById(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/employer/{id}")
     public @ResponseBody
     Boolean updateEmployerData(@RequestBody Employer employer) {
@@ -61,5 +71,18 @@ public class EmployerController {
         return employerService.getAllEmployers();
     }
 
+    @DeleteMapping("/employer/{id}")
+    public @ResponseBody
+    Boolean deleteEmployerById(@PathVariable Integer id) {
+        log.info(String.valueOf(id));
+        return employerService.deleteEmployerById(id);
+    }
+
+    @PostMapping("/employer/title")
+    public @ResponseBody
+    List<Employer> getEmployersBySearchText(@RequestBody String title) {
+        log.info(title);
+        return employerService.getEmployersBySearchText(title);
+    }
 
 }

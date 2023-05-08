@@ -22,7 +22,7 @@ public class VacanciesController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/vacancies")
+    @GetMapping("/vacancy")
     public @ResponseBody
     List<Vacancies> getAllVacancies() {
 
@@ -262,27 +262,7 @@ public class VacanciesController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping("/company")
-    public @ResponseBody
-    List<Vacancies> getVacanciesByCompany(@RequestBody SearchByCompany data) {
-        log.info(String.valueOf(data.getId()));
-        List<Vacancies> vacancies = vacanciesService.getAllVacancies();
-        List<Vacancies> searchVacancies = new ArrayList<>();
-        for (int i = 0; i < vacancies.stream().count(); i++) {
-            if (data.getId()==vacancies.get(i).getEmployer().getId()) {
-                searchVacancies.add(vacancies.get(i));
-            }
-        }
-
-
-        log.info("{}",searchVacancies.size());
-        log.info("{}",searchVacancies);
-        return searchVacancies;
-    }
-
-
-    @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/vacancies/{id}")
+    @GetMapping("/company/{id}")
     public @ResponseBody
     List<Vacancies> getAllVacanciesByCompanyId(@PathVariable Integer id) {
        log.info(String.valueOf(id));
@@ -324,4 +304,11 @@ public class VacanciesController {
         return vacanciesService.addVacancy(vacancy);
     }
 
+
+    @PostMapping("/vacancy/title")
+    public @ResponseBody
+    List<Vacancies> getVacanciesBySearchText(@RequestBody String title) {
+        log.info(title);
+        return vacanciesService.getVacanciesBySearchText(title);
+    }
 }

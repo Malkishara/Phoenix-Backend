@@ -16,4 +16,10 @@ public interface JobSeekerService {
     Boolean sendVerificationCode();
 
     Boolean updatePassword(int userId, String userEmail, String password);
+
+    List<JobSeeker> getAllJobSeekers();
+
+    Boolean deleteJobSeekerById(Integer id);
+
+    List<JobSeeker> getJobSeekersBySearchText(String title);
 }

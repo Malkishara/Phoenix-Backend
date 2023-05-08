@@ -38,4 +38,11 @@ public class JobseekerRequestController {
 
         return requestService.addRequest(request);
     }
+
+    @DeleteMapping("/request/{id}")
+    public @ResponseBody
+    Boolean deleteRequestById(@PathVariable Integer id) {
+        log.info(String.valueOf(id));
+        return requestService.deleteRequestById(id);
+    }
 }

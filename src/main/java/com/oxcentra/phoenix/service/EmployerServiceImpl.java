@@ -3,6 +3,7 @@ package com.oxcentra.phoenix.service;
 import com.oxcentra.phoenix.dto.EmployerDto;
 import com.oxcentra.phoenix.model.Employer;
 import com.oxcentra.phoenix.model.JobSeeker;
+import com.oxcentra.phoenix.model.Vacancies;
 import com.oxcentra.phoenix.repository.EmployerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -25,6 +27,9 @@ public class EmployerServiceImpl implements EmployerService{
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private VacanciesService vacanciesService;
 
     private int verificationCode;
     private Employer employer1;
@@ -135,6 +140,25 @@ log.info(String.valueOf(num));
     }
 
     @Override
+    public Boolean deleteEmployerById(Integer id) {
+        vacanciesService.deleteVacancyByCompanyId(id);
+        employerRepository.deleteById(id);
+        log.info("deleted");
+        return true;
+    }
+
+    @Override
+    public List<Employer> getEmployersBySearchText(String title) {
+        List<Employer> allEmployers=getAllEmployers();
+        List<Employer> employerList=new ArrayList<>();
+        String text=title.toLowerCase();
+
+        employerList=allEmployers.stream().filter(v->v.getName().toLowerCase().contains(text)).collect(Collectors.toList());
+        log.info(String.valueOf(employerList));
+        return employerList;
+    }
+
+    @Override
     public Boolean saveEmployer() {
         String body="Congratulations!!! You have successfully registered with Phoenix.";
         String subject="Registration Successful";
@@ -174,7 +198,7 @@ log.info(String.valueOf(num));
         log.info(String.valueOf(employer.getId()));
         log.info(getEmployerById(employer.getId()).getPassword());
         employer.setPassword(getEmployerById(employer.getId()).getPassword());
-        employer.setVerification(getEmployerById(employer.getId()).getVerification());
+        //employer.setVerification(getEmployerById(employer.getId()).getVerification());
         employerRepository.save(employer);
         return true;
     }

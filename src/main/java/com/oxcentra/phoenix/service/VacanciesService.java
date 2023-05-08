@@ -19,4 +19,8 @@ public interface VacanciesService {
     Boolean updateVacancy(Vacancy vacancy);
 
     Boolean addVacancy(Vacancy vacancy);
+
+    void deleteVacancyByCompanyId(Integer id);
+
+    List<Vacancies> getVacanciesBySearchText(String title);
 }

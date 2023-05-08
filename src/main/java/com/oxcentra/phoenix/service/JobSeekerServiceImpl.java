@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -128,6 +129,29 @@ public class JobSeekerServiceImpl implements JobSeekerService{
         jobSeekerRepository.save(jobSeeker);
         emailService.sendEmail(userEmail,body,subject);
         return true;
+    }
+
+    @Override
+    public List<JobSeeker> getAllJobSeekers() {
+        return jobSeekerRepository.findAll();
+    }
+
+    @Override
+    public Boolean deleteJobSeekerById(Integer id) {
+        log.info("delete jb seeker id: "+id);
+        jobSeekerRepository.deleteById(id);
+        return true;
+    }
+
+    @Override
+    public List<JobSeeker> getJobSeekersBySearchText(String title) {
+        List<JobSeeker> allJobSeekers=getAllJobSeekers();
+        List<JobSeeker> jobSeekerList=new ArrayList<>();
+        String text=title.toLowerCase();
+
+        jobSeekerList=allJobSeekers.stream().filter(s->text.contains(s.getFirstName().toLowerCase()) || text.contains(s.getLastName().toLowerCase())).collect(Collectors.toList());
+        log.info(String.valueOf(jobSeekerList));
+        return jobSeekerList;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.oxcentra.phoenix.controller;
 
 import com.oxcentra.phoenix.dto.JobSeekerDto;
+import com.oxcentra.phoenix.model.Employer;
 import com.oxcentra.phoenix.model.JobSeeker;
 import com.oxcentra.phoenix.model.Vacancies;
 import com.oxcentra.phoenix.service.JobSeekerService;
@@ -51,5 +52,24 @@ public class JobSeekerController {
         return jobSeekerService.getJobseekerById(id);
     }
 
+    @GetMapping("/jobseeker")
+    public @ResponseBody
+    List<JobSeeker> getAllJobSeeker(){
+        return jobSeekerService.getAllJobSeekers();
+    }
+
+    @DeleteMapping("/jobseeker/{id}")
+    public @ResponseBody
+    Boolean deleteJobSeekerById(@PathVariable Integer id) {
+        log.info(String.valueOf(id));
+        return jobSeekerService.deleteJobSeekerById(id);
+    }
+
+    @PostMapping("/jobseeker/title")
+    public @ResponseBody
+    List<JobSeeker> getJobSeekersBySearchText(@RequestBody String title) {
+        log.info(title);
+        return jobSeekerService.getJobSeekersBySearchText(title);
+    }
 
 }

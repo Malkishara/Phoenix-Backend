@@ -54,6 +54,13 @@ public class VacanciesServiceImpl implements VacanciesService{
     @Override
     public Boolean updateVacancy(Vacancy vacancy) {
         log.info(vacancy.getTitle());
+        log.info(vacancy.getDescriptionImg());
+        if(vacancy.getDescriptionImg()==null){
+            Optional<Vacancies> vacancy1=getVacancyById(vacancy.getId());
+            log.info(String.valueOf(vacancy1));
+            vacancy.setDescriptionImg(vacancy1.get().getDescriptionImg());
+        }
+        log.info(vacancy.getDescriptionImg());
         vacancyRepository.save(vacancy);
         return true;
     }
@@ -61,7 +68,25 @@ public class VacanciesServiceImpl implements VacanciesService{
     @Override
     public Boolean addVacancy(Vacancy vacancy) {
         log.info(vacancy.getTitle());
+        log.info(String.valueOf(vacancy.getEmployer()));
+        log.info(vacancy.getDescription());
         vacancyRepository.save(vacancy);
         return true;
+    }
+
+    @Override
+    public void deleteVacancyByCompanyId(Integer id) {
+        vacancyRepository.deleteByEmployer(id);
+    }
+
+    @Override
+    public List<Vacancies> getVacanciesBySearchText(String title) {
+        List<Vacancies> allVacancies=getAllVacancies();
+        List<Vacancies> vacanciesList=new ArrayList<>();
+        String text=title.toLowerCase();
+
+        vacanciesList=allVacancies.stream().filter(v->v.getTitle().toLowerCase().contains(text)).collect(Collectors.toList());
+        log.info(String.valueOf(vacanciesList));
+        return vacanciesList;
     }
 }

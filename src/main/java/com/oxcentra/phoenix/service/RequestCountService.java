@@ -9,4 +9,6 @@ public interface RequestCountService {
 
 
     Boolean updateRequestCount(Integer id);
+
+    void deleteRequest(Integer vacancy);
 }

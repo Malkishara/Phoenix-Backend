@@ -26,4 +26,8 @@ public interface EmployerService {
     Boolean updatePassword(Integer id,String userEmail, String password);
 
     List<Employer> getAllEmployers();
+
+    Boolean deleteEmployerById(Integer id);
+
+    List<Employer> getEmployersBySearchText(String title);
 }

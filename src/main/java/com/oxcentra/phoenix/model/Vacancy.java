@@ -24,7 +24,7 @@ public class Vacancy {
 
 
     @Column(name="company_id")
-    private Integer company;
+    private Integer employer;
 
     @Column(name="category_id")
     private String category;
@@ -43,4 +43,6 @@ public class Vacancy {
     @Column(name="description")
     private String description;
 
+    @Column(name="description_image")
+    private String descriptionImg;
 }

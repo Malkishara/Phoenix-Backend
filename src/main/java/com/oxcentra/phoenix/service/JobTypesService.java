@@ -6,4 +6,10 @@ import java.util.List;
 
 public interface JobTypesService {
     List<JobTypes> getAllJobTypes();
+
+    Boolean deleteTypeById(String id);
+
+    Boolean updateType(JobTypes jobTypes);
+
+    Boolean addType(JobTypes jobTypes);
 }

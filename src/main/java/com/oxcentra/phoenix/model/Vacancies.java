@@ -48,6 +48,9 @@ public class Vacancies implements Serializable {
     @Column(name="description")
     private String description;
 
+    @Column(name="description_image")
+    private String descriptionImg;
+
     @Column(name="num_of_request")
     private int numOfRequests;
 

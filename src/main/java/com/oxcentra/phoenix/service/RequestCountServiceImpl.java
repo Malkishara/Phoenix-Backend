@@ -32,4 +32,17 @@ public class RequestCountServiceImpl implements RequestCountService{
 
         return true;
     }
+
+    @Override
+    public void deleteRequest(Integer vacancy) {
+        Optional<RequestCount> requestCount=requestCountRepository.findById(vacancy);
+
+        int numOfRequests=requestCount.get().getNumOfRequests();
+        numOfRequests=numOfRequests-1;
+
+
+        RequestCount existingRequestCount=requestCount.get();
+        existingRequestCount.setNumOfRequests(numOfRequests);
+        requestCountRepository.save(existingRequestCount);
+    }
 }
