@@ -3,6 +3,7 @@ package com.oxcentra.phoenix.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Getter
@@ -45,4 +46,7 @@ public class Vacancy {
 
     @Column(name="description_image")
     private String descriptionImg;
+
+    @Column(name="expiration_date")
+    private Date expirationDate;
 }

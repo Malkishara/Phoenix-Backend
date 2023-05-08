@@ -3,6 +3,7 @@ package com.oxcentra.phoenix.model;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 
 @Data
@@ -54,5 +55,6 @@ public class Vacancies implements Serializable {
     @Column(name="num_of_request")
     private int numOfRequests;
 
-
+    @Column(name="expiration_date")
+    private Date expirationDate;
 }
